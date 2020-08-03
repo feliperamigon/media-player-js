@@ -1,0 +1,40 @@
+function MediaPlayer(config) {
+    this.media = config.el;
+    this.plugins = config.plugins || [];
+
+    this._initPlugins();
+}
+
+MediaPlayer.prototype._initPlugins = function () {
+    this.plugins.forEach(plugin => {
+        plugin.run(this);
+    });
+}
+
+MediaPlayer.prototype.play = function () {
+    this.media.play();
+
+}
+
+MediaPlayer.prototype.pause = function () {
+    this.media.pause();
+}
+
+MediaPlayer.prototype.handlePlayClick = function () {
+    return this.media.paused ? this.play() : this.pause();
+}
+
+MediaPlayer.prototype.mute = function () {
+    this.media.muted = true;
+}
+
+MediaPlayer.prototype.unmute = function () {
+    this.media.muted = false;
+}
+
+MediaPlayer.prototype.handleMuteClick = function () { 
+    return this.media.muted ? this.media.mute : this.media.unmute;
+}
+
+
+export default MediaPlayer;

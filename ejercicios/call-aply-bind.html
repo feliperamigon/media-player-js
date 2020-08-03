@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <a href="/ejercicios/">Go back</a>
+    <p><em>Abre la consola</em></p>
+
+    <ul>
+        <li class="call-to-action"><button>Aprender</button></li>
+        <li class="call-to-action"><button>Aprender Más</button></li>
+        <li class="call-to-action"><button>¡Nunca parar de Aprender!</button></li>
+    </ul>
+
+    <script>
+        // Establece 'this' usando 'call'
+        function saludar() {
+            console.log(`Hola. Soy ${this.name} ${this.apellido}`);
+        }
+
+        const mateo = {
+            name: 'Mateo',
+            apellido: 'Alvarez'
+        }
+
+        saludar.call(mateo);
+
+        // Establece 'this' usando 'call' y pasar argumentos a la función
+        function caminar(metros, direccion) {
+            console.log(`${this.name} camina ${metros} metros hacia el ${direccion}`);
+        }
+
+        caminar.call(mateo, 400, 'norte');
+
+        // Establece 'this' usando 'apply' y pasar argumentos a la funcion
+        const valores = [800, 'sur'];
+        caminar.apply(mateo, valores);
+
+        /*
+            Call = commas
+            Apply = Arrays
+        */
+
+        // Establecer 'this' en una nueva funcion usando 'bind'
+        const emmanuel = { name: 'Emmanuel', apellido: 'Martinez' };
+        const emmanuelSaluda = saludar.bind(emmanuel);
+        emmanuelSaluda();
+
+        const emmanuelCamina = caminar.bind(emmanuel, 1000, 'Este');
+        emmanuelCamina();
+
+        // Cuándo es util usar uno de estos métodos
+        const buttons = document.getElementsByClassName('call-to-action');
+        // buttons.forEach(button => {
+        //     button.onclick = () => alert('Nunca pares de aprender mi pex');
+        // });
+
+        // NodeList
+        Array.prototype.forEach.call(buttons, button => {
+            button.onclick = () => alert('Nunca pares de aprender mi pex');
+        })
+
+
+    </script>
+</body>
+
+</html>
